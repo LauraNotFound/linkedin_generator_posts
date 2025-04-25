@@ -20,6 +20,14 @@ Este repositorio contiene un potente agente inteligente diseñado en N8N para au
 3.  **🔗 Conecta tus Credenciales:**
     * Crea o selecciona tus credenciales de LinkedIn en los nodos necesarios. ¡No olvides este paso crucial! 😉
 
+https://github.com/user-attachments/assets/f0a81577-0a13-46a5-b954-47787e01ed0b
+
+
+
+https://github.com/user-attachments/assets/f394deb0-70f4-4dae-bdf9-78a57f88346f
+
+
+
 4.  **🧪 ¡A Probar!**
     * Ejecuta el flujo con el botón "Execute Workflow" para verificar que todo funcione bien. ✅
 
