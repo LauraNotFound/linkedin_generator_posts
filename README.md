@@ -1,5 +1,7 @@
 # AGENTE INTELIGENTE GENERADOR DE POSTS EN LINKEDIN
 
+Este repositorio contiene un potente agente inteligente diseñado en N8N para automatizar la tediosa tarea de generar y publicar contenido en LinkedIn. Este flujo de trabajo permite optimizar tu presencia en la red profesional, programar publicaciones estratégicamente y mantener a tu audiencia informada sin la necesidad de intervención manual constante. A continuación, encontrarás una guía detallada para importar y configurar este agente en tu propia instancia de N8N.
+
 # Guía Rápida: Importar y Utilizar el Flujo de LinkedIn con N8N
 
 Esta guía te mostrará cómo importar y configurar el flujo de N8N para la automatización de publicaciones en LinkedIn desde el archivo JSON que has creado.
