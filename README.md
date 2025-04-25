@@ -33,4 +33,4 @@ Este repositorio contiene un potente agente inteligente diseñado en N8N para au
 * **📢 Monitoreo:** Configura alertas para saber si algo va mal.
 * **📚 API:** Échale un vistazo a la documentación de la API de LinkedIn para entender mejor cómo funciona todo.
 
-¡Esperamos que este agente inteligente te ayude a potenciar tu presencia en LinkedIn sin esfuerzo! Si tienes alguna duda, ¡no dudes en preguntar! 😊
+¡Espero que este agente inteligente te ayude a potenciar tu presencia en LinkedIn sin esfuerzo! Si tienes alguna duda, ¡no dudes en preguntarme! 😊
