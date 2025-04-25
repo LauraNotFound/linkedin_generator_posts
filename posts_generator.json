@@ -1,0 +1,171 @@
+{
+  "name": "posts_generator",
+  "nodes": [
+    {
+      "parameters": {
+        "person": "_QjQTf7Ioa",
+        "text": "={{ $json.specificContent[\"com.linkedin.ugc.ShareContent\"].shareCommentary.text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        900,
+        0
+      ],
+      "id": "7a0c9fde-6b5f-424f-b1b9-5b3e0340c658",
+      "name": "LinkedIn",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "XidUbfEsRIjXqk4a",
+          "name": "LinkedIn account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://gnews.io/api/v4/top-headlines?lang=en&token=fca9f75fd8dbe08db5a0883ab0cd7eb1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        140,
+        0
+      ],
+      "id": "822eeff7-624b-46ae-b339-9912c99587ed",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        0
+      ],
+      "id": "5a95d82b-50bd-4370-848e-2391c93b90c8",
+      "name": "When clicking 'Test workflow'"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "==Actúa como un curador de contenidos para LinkedIn. Aquí hay noticias actuales:\n{{ $json[\"articles\"].map(n => `📰 Título: ${n.title}\\\\n📝 Descripción: ${n.description}\\\\n🔗 ${n.url}`).join('\\\\n\\\\n') }}\n\n**Instrucciones:**  \n1. **Selecciona 5 noticias** relevantes para profesionales de tecnología.  \n2. **Para cada noticia**, redacta un post independiente con:  \n   - **Resumen clave** (máximo 200 palabras) 📌  \n   - **Reflexión o pregunta** para engagement 💬  \n   - **Formato Unicode**:  \n     - **Negrita matemática (𝐞𝐣𝐞𝐦𝐩𝐥𝐨)** para títulos/frases clave.  \n     - **Itálica matemática (𝘦𝘫𝘦𝘮𝘱𝘭𝘰)** para énfasis suave.  \n   - **Emojis** donde sea relevante (ej: 🔥, 💡, 🚀).  \n3. **Salida**:  \n   - Devuelve **SOLO un array JSON** con los 5 posts listos para publicar en español.  \n   - Cada post debe seguir este ejemplo (sin comentarios ni marcas ```):  \n```json\n[\n  \"𝐓𝐞𝐜𝐧𝐨𝐥𝐨𝐠í𝐚 𝐝𝐞 𝐯𝐚𝐧𝐠𝐮𝐚𝐫𝐝𝐢𝐚: 𝘓𝘢 𝘐𝘈 𝘢𝘷𝘢𝘯𝘻𝘢 𝘩𝘢𝘤𝘪𝘢... 🔍 ¿𝘊ó𝘮𝘰 𝘢𝘴𝘢𝘳í𝘢𝘴 𝘦𝘴𝘵𝘢𝘴 𝘯𝘶𝘦𝘷𝘢𝘴 𝘩𝘦𝘳𝘳𝘢𝘮𝘪𝘦𝘯𝘵𝘢𝘴 𝘦𝘯 𝘵𝘶 𝘵𝘳𝘢𝘣𝘢𝘫𝘰? 💭\",\n  \"𝐂𝐢𝐛𝐞𝐫𝐬𝐞𝐠𝐮𝐫𝐢𝐝𝐚𝐝 𝐞𝐧 𝟐𝟎𝟐𝟒: 𝘓𝘢𝘴 𝘢𝘭𝘢𝘴 𝘥𝘦 𝘢𝘵𝘢𝘲𝘶𝘦𝘴... 🔐 𝘛𝘦 𝘱𝘳𝘦𝘱𝘢𝘳𝘢𝘴𝘵𝘦 𝘱𝘢𝘳𝘢 𝘦𝘴𝘵𝘰𝘴 𝘳𝘪𝘦𝘴𝘨𝘰𝘴? 🛡️\"\n]"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        340,
+        0
+      ],
+      "id": "17a6201f-4856-4c96-bb9b-ca891e4bb5b1",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-4-turbo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        360,
+        200
+      ],
+      "id": "5e943c5a-3207-4487-8b4b-9d18776c1c1f",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "shvyQQBQveM3yX0u",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawText = $input.all()[0].json.text;\nconst cleanedText = rawText.replace(/```json|```/g, '').trim();\n\nlet posts;\ntry {\n  posts = JSON.parse(cleanedText);\n} catch (error) {\n  const arrayMatch = cleanedText.match(/\\[.*\\]/s);\n  if (arrayMatch) {\n    posts = JSON.parse(arrayMatch[0]);\n  } else {\n    throw new Error('No se pudo parsear el output del LLM: ' + cleanedText);\n  }\n}\n\nreturn posts.map(postText => ({\n  json: {\n    author: \"urn:li:person:TUID\",\n    lifecycleState: \"PUBLISHED\",\n    specificContent: {\n      \"com.linkedin.ugc.ShareContent\": {\n        shareCommentary: {\n          text: postText\n        },\n        shareMediaCategory: \"NONE\"\n      }\n    },\n    visibility: {\n      \"com.linkedin.ugc.MemberNetworkVisibility\": \"PUBLIC\"\n    }\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        0
+      ],
+      "id": "38d1fec0-1b05-4cd2-ba7b-e53818c6d57a",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking 'Test workflow'": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d5b24b4f-aca2-4005-bf2a-0edad6e3455d",
+  "meta": {
+    "instanceId": "4fc67c4d1ec039047c748c0460b50280892f2b5b93d03c6293b822abbab410dc"
+  },
+  "id": "7iganVxSaaXrL0GX",
+  "tags": []
+}
