@@ -11,11 +11,10 @@ Este repositorio contiene un potente agente inteligente diseñado en N8N para au
     * Haz clic en "Import" y selecciona tu archivo JSON. ¡Listo! ✨
 
 2.  **⚙️ Configura los Nodos:**
-    * **Credenciales:** Si usas la API, añade tus credenciales de LinkedIn (🔑). Ve a "Credentials" en N8N.
-    * **Trigger:** Define cómo se activará tu automatización (⏰, 🔗, etc.).
-    * **Datos:** Asegúrate de que los nodos de manipulación de datos preparen bien tu post (📝).
-    * **LinkedIn:** Conecta el nodo de LinkedIn con tus credenciales y define el contenido (🚀).
-    * **Errores:** Revisa cómo se gestionan los fallos (⚠️).
+    * **Credenciales Linkedin:** Si usas la API, añade tus credenciales de LinkedIn (🔑). Ve a "Trigger LinkedIn".
+    * **Credenciales GNews:** Agrega las credenciales del API de GNews (📝 Registrate para obtener tus credenciales en: https://gnews.io/register ).
+    * **Credenciales OpenAI** Obten tus credenciales de OpenAI en 🔗 https://platform.openai.com/docs/overview y luego colocalas en el nodo OpenAI Chat Model.
+    * **Personaliza tu contenido:** Puedes modificar el prompt del Basic LLM Model para que el contenido a publicar sea acorde a tu perfil 🧐.
 
 3.  **🔗 Conecta tus Credenciales:**
     * Crea o selecciona tus credenciales de LinkedIn en los nodos necesarios. ¡No olvides este paso crucial! 😉
@@ -29,9 +28,7 @@ Este repositorio contiene un potente agente inteligente diseñado en N8N para au
 ## 🚀 Consejos Extra
 
 * **💬 Comentarios:** Añade notas a tus nodos para recordar qué hacen.
-* **🔒 Variables:** Usa variables de entorno para datos sensibles como tus credenciales.
-* **📢 Monitoreo:** Configura alertas para saber si algo va mal.
-* **📚 API:** Échale un vistazo a la documentación de la API de LinkedIn para entender mejor cómo funciona todo.
+* **📚 API:** Échale un vistazo a la documentación de la API de LinkedIn y OpenAI para entender mejor cómo funciona todo.
 
 **Aquí te dejo un vídeo mostrando el funcionamiento de este agente 👩‍💻
 
